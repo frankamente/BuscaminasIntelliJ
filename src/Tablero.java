@@ -42,7 +42,7 @@ public class Tablero {
             columna = (int) (Math.random() * (MAXIMO - MINIMO + 1) + MINIMO);
             for (Coordenada coordenada : this.getCoordenadas()) {
                 if (coordenada.getFila() == fila && coordenada.getColumna() == columna && !coordenada.isMina()) {
-                    coordenada.ponerMina();
+                    ponerMina(coordenada);
                     i++;
                 }
             }
@@ -59,9 +59,52 @@ public class Tablero {
 
     }
 
-    public void ponerMina(int fila, int columna) {
-
-
+    public void ponerMina(Coordenada coordenada) {
+        coordenada.ponerMina();
+        for (Coordenada coordenada1 : this.getCoordenadas()) {
+            if (!coordenada.equals(coordenada1) && !coordenada1.isMina()) {
+                //Numero arriba izquierda de la mina
+                if (coordenada1.getFila() == (coordenada.getFila() - 1)
+                        && coordenada1.getColumna() == (coordenada.getColumna() - 1)) {
+                    coordenada1.setMinasCercas(coordenada1.getMinasCercas() + 1);
+                }
+                //Numero arriba centro de la mina
+                if (coordenada1.getFila() == (coordenada.getFila() - 1)
+                        && coordenada1.getColumna() == (coordenada.getColumna())) {
+                    coordenada1.setMinasCercas(coordenada1.getMinasCercas() + 1);
+                }
+                //Numero arriba derecha de la mina
+                if (coordenada1.getFila() == (coordenada.getFila() - 1)
+                        && coordenada1.getColumna() == (coordenada.getColumna() + 1)) {
+                    coordenada1.setMinasCercas(coordenada1.getMinasCercas() + 1);
+                }
+                //Numero misma fila a la izquierda de la mina
+                if (coordenada1.getFila() == (coordenada.getFila())
+                        && coordenada1.getColumna() == (coordenada.getColumna() - 1)) {
+                    coordenada1.setMinasCercas(coordenada1.getMinasCercas() + 1);
+                }
+                //Numero misma fila a la derecha de la mina
+                if (coordenada1.getFila() == (coordenada.getFila())
+                        && coordenada1.getColumna() == (coordenada.getColumna() + 1)) {
+                    coordenada1.setMinasCercas(coordenada1.getMinasCercas() + 1);
+                }
+                //Numero debajo a la izquierda de la mina
+                if (coordenada1.getFila() == (coordenada.getFila() + 1)
+                        && coordenada1.getColumna() == (coordenada.getColumna() - 1)) {
+                    coordenada1.setMinasCercas(coordenada1.getMinasCercas() + 1);
+                }
+                //Numero debajo en el centro de la mina
+                if (coordenada1.getFila() == (coordenada.getFila() + 1)
+                        && coordenada1.getColumna() == (coordenada.getColumna())) {
+                    coordenada1.setMinasCercas(coordenada1.getMinasCercas() + 1);
+                }
+                //Numero debajo a la derecha de la mina
+                if (coordenada1.getFila() == (coordenada.getFila() + 1)
+                        && coordenada1.getColumna() == (coordenada.getColumna() + 1)) {
+                    coordenada1.setMinasCercas(coordenada1.getMinasCercas() + 1);
+                }
+            }
+        }
     }
 
     public void mostrarTablero() {

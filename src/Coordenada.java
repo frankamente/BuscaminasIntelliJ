@@ -9,6 +9,8 @@ public class Coordenada {
 
     private int estado;
 
+    private int minasCercas;
+
     private boolean mina;
 
     public final int ESTADO_BOCA_ABAJO = 0;
@@ -21,6 +23,7 @@ public class Coordenada {
         this.fila = fila;
         mina = false;
         estado = ESTADO_BOCA_ABAJO;
+        minasCercas = 0;
     }
 
     public int getFila() {
@@ -61,7 +64,7 @@ public class Coordenada {
 
     @Override
     public String toString() {
-        return pintarMina() + ", ";
+        return pintarMina() + getMinasCercas() + ", ";
     }
 
     private String pintarMina() {
@@ -70,5 +73,31 @@ public class Coordenada {
 
     private String pintarTipo() {
         return estado == ESTADO_BOCA_ABAJO ? "-" : estado == ESTADO_BOCA_ARRIBA ? "_" : "" + estado;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Coordenada)) return false;
+
+        Coordenada that = (Coordenada) o;
+
+        if (fila != that.fila) return false;
+        return columna == that.columna;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = fila;
+        result = 31 * result + columna;
+        return result;
+    }
+
+    public int getMinasCercas() {
+        return minasCercas;
+    }
+
+    public void setMinasCercas(int minasCercas) {
+        this.minasCercas = minasCercas;
     }
 }
