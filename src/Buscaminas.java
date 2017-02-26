@@ -30,7 +30,6 @@ public class Buscaminas {
         tablero.inicializarTablero();
         Coordenada coordenada;
         do {
-            System.out.println("Celdas disponibles: " + tablero.getCeldasDisponibles());
             tablero.mostrarTablero();
             if (tablero.getCeldasDisponibles() == 0) {
                 finDeJuego = GANA_JUGADOR;

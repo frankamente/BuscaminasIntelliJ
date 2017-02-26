@@ -287,11 +287,21 @@ public class Tablero {
     public void mostrarTablero() {
         int fila = 0;
         int columna = 0;
+        for (int i = 1; i <= this.numeroColumnas; i++) {
+            System.out.print("\t" + "\t" + i);
+        }
+
+        System.out.println();
+        System.out.println();
         for (Coordenada coordenada : this.getCoordenadas()) {
+            if (coordenada.getColumna() == 0) {
+                System.out.print(coordenada.getFila() + 1);
+            }
             if (coordenada.getColumna() != (numeroColumnas - 1)) {
-                System.out.print(coordenada);
+                System.out.print("\t" + "\t" + coordenada);
             } else {
-                System.out.println(coordenada);
+                System.out.println("\t" + "\t" + coordenada);
+
             }
         }
     }
