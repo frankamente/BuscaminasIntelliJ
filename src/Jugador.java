@@ -2,7 +2,7 @@
  * Created by frankamente on 25/02/2017.
  */
 public class Jugador {
-    public int[][] elegirPosicion() {
+    public Coordenada elegirPosicion() {
         return null;
     }
 }

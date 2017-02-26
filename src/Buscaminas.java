@@ -23,12 +23,14 @@ public class Buscaminas {
 
     public static void main(String[] args) {
         Buscaminas buscaminas = new Buscaminas();
-        buscaminas.jugar();
+        //buscaminas.jugar();
+        buscaminas.tablero.inicializarTablero();
+        buscaminas.tablero.mostrarTablero();
     }
 
     public void jugar() {
         tablero.inicializarTablero();
-        int[][] coordenada;
+        Coordenada coordenada;
         do {
             tablero.mostrarTablero();
             coordenada = jugador.elegirPosicion();

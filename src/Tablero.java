@@ -1,7 +1,4 @@
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Created by frankamente on 25/02/2017.
@@ -13,53 +10,85 @@ public class Tablero {
     public int MINIMO = 0;
 
     public int numeroMinas = 0;
-    private int[][] coordenadas;
+
+    public int numeroFilas;
+
+    public int numeroColumnas;
+
+    private ArrayList<Coordenada> coordenadas;
 
     public Tablero(int dimensionTablero) {
 
-        coordenadas = new int[dimensionTablero][dimensionTablero];
+        coordenadas = new ArrayList();
         MAXIMO = dimensionTablero - 1;
         numeroMinas = dimensionTablero;
+        numeroColumnas = dimensionTablero;
+        numeroFilas = dimensionTablero;
+
 
     }
 
     public void inicializarTablero() {
-        int[][] coordenada = new int[][];
-        int i = 0;
-        while (i < numeroMinas) {
-            coordenada = ((int) (Math.random() * (MAXIMO - MINIMO + 1) + MINIMO), (int) (Math.random() * (MAXIMO - MINIMO + 1) + MINIMO))
-            ;
-            if (!contieneMina(coordenada)) {
-                coordenada.ponerMina();
-                i++;
+        for (int i = 0; i < numeroFilas; i++) {
+            for (int j = 0; j < numeroColumnas; j++) {
+                this.getCoordenadas().add(new Coordenada(i, j));
             }
+        }
+        int i = 0;
+        int fila;
+        int columna;
+        while (i < numeroMinas) {
+            fila = (int) (Math.random() * (MAXIMO - MINIMO + 1) + MINIMO);
+            columna = (int) (Math.random() * (MAXIMO - MINIMO + 1) + MINIMO);
+            for (Coordenada coordenada : this.getCoordenadas()) {
+                if (coordenada.getFila() == fila && coordenada.getColumna() == columna && !coordenada.isMina()) {
+                    coordenada.ponerMina();
+                    i++;
+                }
+            }
+
         }
 
     }
 
-    public void desvelarCelda(int[][] coordenada) {
+    public void desvelarCelda(Coordenada coordenada) {
 
     }
 
-    public boolean contieneMina(int[][] coordenada) {
+    public boolean contieneMina(Coordenada coordenada) {
         return false;
     }
 
-    public void actualizarTablero(int[][] coordenada) {
+    public void actualizarTablero(Coordenada coordenada) {
 
     }
 
     public void ponerMina(int fila, int columna) {
-        coordenadas[fila][columna] = 1;
+
+
     }
 
     public void mostrarTablero() {
-
+        int fila = 0;
+        int columna = 0;
+        for (Coordenada coordenada : this.getCoordenadas()) {
+            if (coordenada.getColumna() != (numeroColumnas - 1)) {
+                System.out.print(coordenada);
+            } else {
+                System.out.println(coordenada);
+            }
+        }
     }
 
     public int getCeldasDisponibles() {
         return 0;
     }
 
+    public ArrayList<Coordenada> getCoordenadas() {
+        return coordenadas;
+    }
 
+    public void setCoordenadas(ArrayList<Coordenada> coordenadas) {
+        this.coordenadas = coordenadas;
+    }
 }
