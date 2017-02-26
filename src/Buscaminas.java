@@ -24,25 +24,26 @@ public class Buscaminas {
     public static void main(String[] args) {
         Buscaminas buscaminas = new Buscaminas();
         buscaminas.jugar();
-        buscaminas.tablero.inicializarTablero();
-        buscaminas.tablero.mostrarTablero();
-        System.out.println(buscaminas.tablero.getCeldasDisponibles());
     }
 
     public void jugar() {
         tablero.inicializarTablero();
         Coordenada coordenada;
         do {
+            System.out.println("Celdas disponibles: " + tablero.getCeldasDisponibles());
             tablero.mostrarTablero();
+            if (tablero.getCeldasDisponibles() == 0) {
+                finDeJuego = GANA_JUGADOR;
+                tablero.desvelarMinas();
+            }
             coordenada = jugador.elegirPosicion();
             if (tablero.contieneMina(coordenada)) {
+                tablero.desvelarMinas();
                 setFinDeJuego(PIERDE_JUGADOR);
-            } else if (tablero.getCeldasDisponibles() == 0) {
-                finDeJuego = GANA_JUGADOR;
             } else {
                 tablero.actualizarTablero(coordenada);
             }
-        } while (finDeJuego == NO_FIN);
+        } while (getFinDeJuego() == NO_FIN);
         if (finDeJuego == GANA_JUGADOR) {
             System.out.println("GANA JUGADOR!!");
         } else {

@@ -51,13 +51,190 @@ public class Tablero {
 
     }
 
+    public void cambiarTipo(Coordenada coordenada) {
+
+        for (Coordenada coordenada1 : this.getCoordenadas()) {
+            if (coordenada1.equals(coordenada)) {
+                coordenada1.setEstado(coordenada1.getEstado() == coordenada1.ESTADO_BOCA_ABAJO ? coordenada1.ESTADO_BOCA_ARRIBA : coordenada1.ESTADO_BOCA_ABAJO);
+
+            }
+        }
+
+    }
+
+    public void cambiarEstado(Coordenada coordenada, int estado) {
+
+        for (Coordenada coordenada1 : this.getCoordenadas()) {
+            if (coordenada1.equals(coordenada)) {
+                coordenada1.setEstado(estado);
+
+            }
+        }
+
+    }
+
     public boolean contieneMina(Coordenada coordenada) {
-        return coordenada.isMina();
+        for (Coordenada coordenada1 : getCoordenadas()) {
+            if (coordenada1.equals(coordenada)) {
+                return coordenada1.isMina();
+            }
+        }
+        return false;
+
     }
 
     public void actualizarTablero(Coordenada coordenada) {
+        for (Coordenada coordenada1 : getCoordenadas()) {
+            if (coordenada1.equals(coordenada)) {
+                if (coordenada1.getMinasCercas() == 0 && !coordenada1.isMina()) {
+                    coordenada1.setEstado(coordenada1.ESTADO_BOCA_ARRIBA);
+                } else {
+                    cambiarEstado(coordenada1, 999);
+                }
+            }
+            if (coordenada1.getFila() == coordenada.getFila() && coordenada1.getColumna() == coordenada.getColumna() - 1) {
+                if (coordenada1.getMinasCercas() == 0 && !coordenada1.isMina()) {
+                    coordenada1.setEstado(coordenada1.ESTADO_BOCA_ARRIBA);
+                } else {
+                    cambiarEstado(coordenada1, 999);
+                }
+            }
+            if (coordenada1.getFila() == coordenada.getFila() && coordenada1.getColumna() == coordenada.getColumna() + 1) {
+                if (coordenada1.getMinasCercas() == 0 && !coordenada1.isMina()) {
+                    coordenada1.setEstado(coordenada1.ESTADO_BOCA_ARRIBA);
+                } else {
+                    cambiarEstado(coordenada1, 999);
+                }
+            }
+            if (coordenada1.getFila() == coordenada.getFila() - 1 && coordenada1.getColumna() == coordenada.getColumna() - 1) {
+                if (coordenada1.getMinasCercas() == 0 && !coordenada1.isMina()) {
+                    coordenada1.setEstado(coordenada1.ESTADO_BOCA_ARRIBA);
+                } else {
+                    cambiarEstado(coordenada1, 999);
+                }
+            }
 
+            if (coordenada1.getFila() == coordenada.getFila() - 1 && coordenada1.getColumna() == coordenada.getColumna()) {
+                if (coordenada1.getMinasCercas() == 0 && !coordenada1.isMina()) {
+                    coordenada1.setEstado(coordenada1.ESTADO_BOCA_ARRIBA);
+                } else {
+                    cambiarEstado(coordenada1, 999);
+                }
+            }
+
+
+            if (coordenada1.getFila() == coordenada.getFila() - 1 && coordenada1.getColumna() == coordenada.getColumna() + 1) {
+                if (coordenada1.getMinasCercas() == 0 && !coordenada1.isMina()) {
+                    coordenada1.setEstado(coordenada1.ESTADO_BOCA_ARRIBA);
+                } else {
+                    cambiarEstado(coordenada1, 999);
+                }
+            }
+
+            if (!coordenada1.equals(coordenada)) {
+                if (coordenada1.getFila() == coordenada.getFila() + 1 && coordenada1.getColumna() == coordenada.getColumna() - 1) {
+                    if (coordenada1.getMinasCercas() == 0 && !coordenada1.isMina()) {
+                        coordenada1.setEstado(coordenada1.ESTADO_BOCA_ARRIBA);
+                    } else {
+                        cambiarEstado(coordenada1, 999);
+                    }
+                }
+            }
+            if (coordenada1.getFila() == coordenada.getFila() + 1 && coordenada1.getColumna() == coordenada.getColumna()) {
+                if (coordenada1.getMinasCercas() == 0 && !coordenada1.isMina()) {
+                    coordenada1.setEstado(coordenada1.ESTADO_BOCA_ARRIBA);
+                } else {
+                    cambiarEstado(coordenada1, 999);
+                }
+            }
+
+            if (coordenada1.getFila() == coordenada.getFila() + 1 && coordenada1.getColumna() == coordenada.getColumna() + 1) {
+                if (coordenada1.getMinasCercas() == 0 && !coordenada1.isMina()) {
+                    coordenada1.setEstado(coordenada1.ESTADO_BOCA_ARRIBA);
+                } else {
+                    cambiarEstado(coordenada1, 999);
+                }
+            }
+
+        }
     }
+
+    public ArrayList<Coordenada> coordenadasEnDiagonalDescendienteHaciaDerecha(Coordenada coordenada) {
+        ArrayList<Coordenada> coordenadasEnDiagonalDescendienteHaciaDerecha = new ArrayList();
+        for (int i = 0; i < this.numeroFilas; i++) {
+            for (Coordenada coordenada1 : getCoordenadas()) {
+                if (coordenada1.getFila() == (coordenada.getFila() + i) && coordenada1.getColumna() == (coordenada.getColumna() + i)) {
+                    coordenadasEnDiagonalDescendienteHaciaDerecha.add(coordenada1);
+                }
+            }
+
+        }
+
+        return coordenadasEnDiagonalDescendienteHaciaDerecha;
+    }
+
+    public ArrayList<Coordenada> coordenadasEnDiagonalDescendienteHaciaIzquierda(Coordenada coordenada) {
+        ArrayList<Coordenada> coordenadasEnDiagonalDescendienteHaciaAbajo = new ArrayList();
+        for (int i = 0; i < this.numeroFilas; i++) {
+            for (Coordenada coordenada1 : getCoordenadas()) {
+                if (coordenada1.getFila() == (coordenada.getFila() + i) && coordenada1.getColumna() == (coordenada.getColumna() - i)) {
+                    coordenadasEnDiagonalDescendienteHaciaAbajo.add(coordenada1);
+                }
+            }
+
+        }
+
+        return coordenadasEnDiagonalDescendienteHaciaAbajo;
+    }
+
+    public ArrayList<Coordenada> coordenadasEnDiagonalAscendenteHaciaIzquierda(Coordenada coordenada) {
+        ArrayList<Coordenada> coordenadasEnDiagonalAscendenteHaciaIzquierda = new ArrayList();
+        for (int i = 0; i < this.numeroFilas; i++) {
+            for (Coordenada coordenada1 : getCoordenadas()) {
+                if (coordenada1.getFila() == (coordenada.getFila() - i) && coordenada1.getColumna() == (coordenada.getColumna() - i)) {
+                    coordenadasEnDiagonalAscendenteHaciaIzquierda.add(coordenada1);
+                }
+            }
+
+        }
+
+        return coordenadasEnDiagonalAscendenteHaciaIzquierda;
+    }
+
+    public ArrayList<Coordenada> coordenadasEnDiagonalAscendenteHaciaDerecha(Coordenada coordenada) {
+        ArrayList<Coordenada> coordenadasEnDiagonalAscendenteHaciaDerecha = new ArrayList();
+        for (int i = 0; i < this.numeroFilas; i++) {
+            for (Coordenada coordenada1 : getCoordenadas()) {
+                if (coordenada1.getFila() == (coordenada.getFila() - i) && coordenada1.getColumna() == (coordenada.getColumna() + i)) {
+                    coordenadasEnDiagonalAscendenteHaciaDerecha.add(coordenada1);
+                }
+            }
+
+        }
+
+        return coordenadasEnDiagonalAscendenteHaciaDerecha;
+    }
+
+    public ArrayList<Coordenada> coordenadasEnMismaFila(Coordenada coordenada) {
+        ArrayList<Coordenada> coordenadasEnMismaFila = new ArrayList();
+        for (Coordenada coordenada1 : getCoordenadas()) {
+            if (coordenada1.getFila() == coordenada.getFila()) {
+                coordenadasEnMismaFila.add(coordenada1);
+            }
+        }
+        return coordenadasEnMismaFila;
+    }
+
+    public ArrayList<Coordenada> coordenadasEnMismaColumna(Coordenada coordenada) {
+        ArrayList<Coordenada> coordenadasEnMismaColumna = new ArrayList();
+        for (Coordenada coordenada1 : getCoordenadas()) {
+            if (!coordenada1.equals(coordenada) && coordenada1.getColumna() == coordenada.getColumna()) {
+                coordenadasEnMismaColumna.add(coordenada1);
+            }
+        }
+        return coordenadasEnMismaColumna;
+    }
+
 
     public void ponerMina(Coordenada coordenada) {
         coordenada.ponerMina();
@@ -136,4 +313,62 @@ public class Tablero {
     public void setCoordenadas(ArrayList<Coordenada> coordenadas) {
         this.coordenadas = coordenadas;
     }
+
+    public boolean tieneMinaCerca(Coordenada coordenada) {
+        boolean salida = false;
+        for (Coordenada coordenada1 : this.getCoordenadas()) {
+            if (!coordenada.equals(coordenada1) && coordenada1.isMina()) {
+                //Numero arriba izquierda de la mina
+                if (coordenada1.getFila() == (coordenada.getFila() - 1)
+                        && coordenada1.getColumna() == (coordenada.getColumna() - 1)) {
+                    salida = true;
+                }
+                //Numero arriba centro de la mina
+                if (coordenada1.getFila() == (coordenada.getFila() - 1)
+                        && coordenada1.getColumna() == (coordenada.getColumna())) {
+                    salida = true;
+                }
+                //Numero arriba derecha de la mina
+                if (coordenada1.getFila() == (coordenada.getFila() - 1)
+                        && coordenada1.getColumna() == (coordenada.getColumna() + 1)) {
+                    salida = true;
+                }
+                //Numero misma fila a la izquierda de la mina
+                if (coordenada1.getFila() == (coordenada.getFila())
+                        && coordenada1.getColumna() == (coordenada.getColumna() - 1)) {
+                    salida = true;
+                }
+                //Numero misma fila a la derecha de la mina
+                if (coordenada1.getFila() == (coordenada.getFila())
+                        && coordenada1.getColumna() == (coordenada.getColumna() + 1)) {
+                    salida = true;
+                }
+                //Numero debajo a la izquierda de la mina
+                if (coordenada1.getFila() == (coordenada.getFila() + 1)
+                        && coordenada1.getColumna() == (coordenada.getColumna() - 1)) {
+                    salida = true;
+                }
+                //Numero debajo en el centro de la mina
+                if (coordenada1.getFila() == (coordenada.getFila() + 1)
+                        && coordenada1.getColumna() == (coordenada.getColumna())) {
+                    coordenada1.setMinasCercas(coordenada1.getMinasCercas() + 1);
+                }
+                //Numero debajo a la derecha de la mina
+                if (coordenada1.getFila() == (coordenada.getFila() + 1)
+                        && coordenada1.getColumna() == (coordenada.getColumna() + 1)) {
+                    coordenada1.setMinasCercas(coordenada1.getMinasCercas() + 1);
+                }
+            }
+        }
+        return salida;
+    }
+
+    public void desvelarMinas() {
+        for (Coordenada coordenada : getCoordenadas()) {
+            if (coordenada.isMina()) {
+                coordenada.setEstado(999);
+            }
+        }
+    }
+
 }

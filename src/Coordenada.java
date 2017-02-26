@@ -64,7 +64,7 @@ public class Coordenada {
 
     @Override
     public String toString() {
-        return pintarMina() + getMinasCercas() + ", ";
+        return pintarTipo() + " ";
     }
 
     private String pintarMina() {
@@ -72,7 +72,7 @@ public class Coordenada {
     }
 
     private String pintarTipo() {
-        return estado == ESTADO_BOCA_ABAJO ? "-" : estado == ESTADO_BOCA_ARRIBA ? "_" : "" + estado;
+        return getEstado() == ESTADO_BOCA_ABAJO ? "-" : getEstado() == ESTADO_BOCA_ARRIBA ? " " : isMina() ? "-" : getMinasCercas() + "";
     }
 
     @Override
@@ -100,4 +100,6 @@ public class Coordenada {
     public void setMinasCercas(int minasCercas) {
         this.minasCercas = minasCercas;
     }
+
+
 }
