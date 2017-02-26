@@ -23,9 +23,10 @@ public class Buscaminas {
 
     public static void main(String[] args) {
         Buscaminas buscaminas = new Buscaminas();
-        //buscaminas.jugar();
+        buscaminas.jugar();
         buscaminas.tablero.inicializarTablero();
         buscaminas.tablero.mostrarTablero();
+        System.out.println(buscaminas.tablero.getCeldasDisponibles());
     }
 
     public void jugar() {
@@ -34,7 +35,6 @@ public class Buscaminas {
         do {
             tablero.mostrarTablero();
             coordenada = jugador.elegirPosicion();
-            tablero.desvelarCelda(coordenada);
             if (tablero.contieneMina(coordenada)) {
                 setFinDeJuego(PIERDE_JUGADOR);
             } else if (tablero.getCeldasDisponibles() == 0) {
@@ -43,6 +43,11 @@ public class Buscaminas {
                 tablero.actualizarTablero(coordenada);
             }
         } while (finDeJuego == NO_FIN);
+        if (finDeJuego == GANA_JUGADOR) {
+            System.out.println("GANA JUGADOR!!");
+        } else {
+            System.out.println("PIERDE JUGADOR!!");
+        }
     }
 
     public Tablero getTablero() {

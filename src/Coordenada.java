@@ -7,19 +7,20 @@ public class Coordenada {
 
     private int columna;
 
-    private int tipo;
+    private int estado;
 
     private boolean mina;
 
-    private final int TIPO_BOCA_ABAJO = 0;
+    public final int ESTADO_BOCA_ABAJO = 0;
 
-    private final int TIPO_BOCA_ARRIBA = 1;
+    public final int ESTADO_BOCA_ARRIBA = 1;
 
 
     public Coordenada(int fila, int columna) {
         this.columna = columna;
         this.fila = fila;
         mina = false;
+        estado = ESTADO_BOCA_ABAJO;
     }
 
     public int getFila() {
@@ -38,12 +39,12 @@ public class Coordenada {
         this.columna = columna;
     }
 
-    public int getTipo() {
-        return tipo;
+    public int getEstado() {
+        return estado;
     }
 
-    public void setTipo(int tipo) {
-        this.tipo = tipo;
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 
     public boolean isMina() {
@@ -68,6 +69,6 @@ public class Coordenada {
     }
 
     private String pintarTipo() {
-        return tipo == TIPO_BOCA_ABAJO ? "-" : "0";
+        return estado == ESTADO_BOCA_ABAJO ? "-" : estado == ESTADO_BOCA_ARRIBA ? "_" : "" + estado;
     }
 }

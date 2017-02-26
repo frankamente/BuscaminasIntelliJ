@@ -1,8 +1,8 @@
-/**
- * Created by frankamente on 25/02/2017.
- */
+
 public class Jugador {
     public Coordenada elegirPosicion() {
-        return null;
+        int fila = ES.leeN("Introduce una fila");
+        int columna = ES.leeN("Introduce una columna");
+        return new Coordenada(fila, columna);
     }
 }

@@ -51,12 +51,8 @@ public class Tablero {
 
     }
 
-    public void desvelarCelda(Coordenada coordenada) {
-
-    }
-
     public boolean contieneMina(Coordenada coordenada) {
-        return false;
+        return coordenada.isMina();
     }
 
     public void actualizarTablero(Coordenada coordenada) {
@@ -81,7 +77,13 @@ public class Tablero {
     }
 
     public int getCeldasDisponibles() {
-        return 0;
+        int celdasDisponibles = 0;
+        for (Coordenada coordenada : coordenadas) {
+            if (coordenada.getEstado() == coordenada.ESTADO_BOCA_ABAJO && !coordenada.isMina()) {
+                celdasDisponibles++;
+            }
+        }
+        return celdasDisponibles;
     }
 
     public ArrayList<Coordenada> getCoordenadas() {
