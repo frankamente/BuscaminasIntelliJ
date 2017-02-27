@@ -1,4 +1,3 @@
-
 public class Jugador {
     public Coordenada elegirPosicion() {
         int fila = ES.leeN("Introduce una fila: ");
