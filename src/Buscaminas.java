@@ -7,7 +7,9 @@ public class Buscaminas {
 
     private int finDeJuego;
 
-    private final int DIMENSION_TABLERO = 10;
+    public int NUMERO_FILAS;
+
+    public int NUMERO_COLUMNAS;
 
     public final int NO_FIN = -1;
 
@@ -17,7 +19,9 @@ public class Buscaminas {
 
     public Buscaminas() {
         jugador = new Jugador();
-        tablero = new Tablero(DIMENSION_TABLERO);
+        NUMERO_COLUMNAS = 10;
+        NUMERO_FILAS = 10;
+        tablero = new Tablero(NUMERO_FILAS, NUMERO_COLUMNAS);
         finDeJuego = NO_FIN;
     }
 
@@ -31,10 +35,6 @@ public class Buscaminas {
         Coordenada coordenada;
         do {
             tablero.mostrarTablero();
-            if (tablero.getCeldasDisponibles() == 0) {
-                finDeJuego = GANA_JUGADOR;
-                tablero.desvelarMinas();
-            }
             coordenada = jugador.elegirPosicion();
             if (tablero.contieneMina(coordenada)) {
                 tablero.desvelarMinas();
@@ -42,11 +42,17 @@ public class Buscaminas {
             } else {
                 tablero.actualizarTablero(coordenada);
             }
+            if (tablero.getCeldasDisponibles() == 0) {
+                finDeJuego = GANA_JUGADOR;
+                tablero.desvelarMinas();
+            }
         } while (getFinDeJuego() == NO_FIN);
         if (finDeJuego == GANA_JUGADOR) {
             System.out.println("GANA JUGADOR!!");
+            tablero.mostrarTablero();
         } else {
             System.out.println("PIERDE JUGADOR!!");
+            tablero.mostrarTablero();
         }
     }
 

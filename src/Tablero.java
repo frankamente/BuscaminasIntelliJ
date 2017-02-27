@@ -5,11 +5,9 @@ import java.util.*;
  */
 public class Tablero {
 
-    public int MAXIMO = 0;
+    public int MINIMO;
 
-    public int MINIMO = 0;
-
-    public int numeroMinas = 0;
+    public int numeroMinas;
 
     public int numeroFilas;
 
@@ -17,18 +15,17 @@ public class Tablero {
 
     private ArrayList<Coordenada> coordenadas;
 
-    public Tablero(int dimensionTablero) {
+    public Tablero(int numeroFilas, int numeroColumnas) {
 
         coordenadas = new ArrayList();
-        MAXIMO = dimensionTablero - 1;
-        numeroMinas = dimensionTablero;
-        numeroColumnas = dimensionTablero;
-        numeroFilas = dimensionTablero;
+        numeroMinas = numeroColumnas - 1;
+        this.numeroColumnas = numeroColumnas;
+        this.numeroFilas = numeroFilas;
 
 
     }
 
-    public void inicializarTablero() {
+    void inicializarTablero() {
         for (int i = 0; i < numeroFilas; i++) {
             for (int j = 0; j < numeroColumnas; j++) {
                 this.getCoordenadas().add(new Coordenada(i, j));
@@ -38,8 +35,8 @@ public class Tablero {
         int fila;
         int columna;
         while (i < numeroMinas) {
-            fila = (int) (Math.random() * (MAXIMO - MINIMO + 1) + MINIMO);
-            columna = (int) (Math.random() * (MAXIMO - MINIMO + 1) + MINIMO);
+            fila = (int) (Math.random() * (numeroFilas - MINIMO + 1) + MINIMO);
+            columna = (int) (Math.random() * (numeroColumnas - MINIMO + 1) + MINIMO);
             for (Coordenada coordenada : this.getCoordenadas()) {
                 if (coordenada.getFila() == fila && coordenada.getColumna() == columna && !coordenada.isMina()) {
                     ponerMina(coordenada);
@@ -51,18 +48,7 @@ public class Tablero {
 
     }
 
-    public void cambiarTipo(Coordenada coordenada) {
-
-        for (Coordenada coordenada1 : this.getCoordenadas()) {
-            if (coordenada1.equals(coordenada)) {
-                coordenada1.setEstado(coordenada1.getEstado() == coordenada1.ESTADO_BOCA_ABAJO ? coordenada1.ESTADO_BOCA_ARRIBA : coordenada1.ESTADO_BOCA_ABAJO);
-
-            }
-        }
-
-    }
-
-    public void cambiarEstado(Coordenada coordenada, int estado) {
+    private void cambiarEstado(Coordenada coordenada, int estado) {
 
         for (Coordenada coordenada1 : this.getCoordenadas()) {
             if (coordenada1.equals(coordenada)) {
@@ -73,7 +59,7 @@ public class Tablero {
 
     }
 
-    public boolean contieneMina(Coordenada coordenada) {
+    boolean contieneMina(Coordenada coordenada) {
         for (Coordenada coordenada1 : getCoordenadas()) {
             if (coordenada1.equals(coordenada)) {
                 return coordenada1.isMina();
@@ -83,7 +69,7 @@ public class Tablero {
 
     }
 
-    public void actualizarTablero(Coordenada coordenada) {
+    void actualizarTablero(Coordenada coordenada) {
         for (Coordenada coordenada1 : getCoordenadas()) {
             if (coordenada1.equals(coordenada)) {
                 if (coordenada1.getMinasCercas() == 0 && !coordenada1.isMina()) {
@@ -376,7 +362,7 @@ public class Tablero {
     public void desvelarMinas() {
         for (Coordenada coordenada : getCoordenadas()) {
             if (coordenada.isMina()) {
-                coordenada.setEstado(999);
+                coordenada.setEstado(coordenada.ESTADO_ES_MINA);
             }
         }
     }

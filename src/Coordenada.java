@@ -17,6 +17,8 @@ public class Coordenada {
 
     public final int ESTADO_BOCA_ARRIBA = 1;
 
+    public final int ESTADO_ES_MINA = 2;
+
 
     public Coordenada(int fila, int columna) {
         this.columna = columna;
@@ -72,7 +74,7 @@ public class Coordenada {
     }
 
     private String pintarTipo() {
-        return getEstado() == ESTADO_BOCA_ABAJO ? "-" : getEstado() == ESTADO_BOCA_ARRIBA ? " " : isMina() ? "-" : getMinasCercas() + "";
+        return getEstado() == ESTADO_BOCA_ABAJO ? "-" : getEstado() == ESTADO_BOCA_ARRIBA ? " " : getEstado() == ESTADO_ES_MINA ? pintarMina() : isMina() ? "-" : getMinasCercas() + "";
     }
 
     @Override
