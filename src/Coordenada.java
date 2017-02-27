@@ -1,4 +1,3 @@
-
 public class Coordenada {
 
     private int fila;

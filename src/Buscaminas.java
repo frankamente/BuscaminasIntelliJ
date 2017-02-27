@@ -1,4 +1,5 @@
 
+
 public class Buscaminas {
 
     private Tablero tablero;

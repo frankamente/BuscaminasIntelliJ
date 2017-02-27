@@ -1,5 +1,6 @@
 import java.util.*;
 
+
 public class Tablero {
 
     public int MINIMO;
